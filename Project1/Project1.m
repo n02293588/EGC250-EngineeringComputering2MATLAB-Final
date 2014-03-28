@@ -1,0 +1,109 @@
+%Matt Miccio
+%MATLAB Project 1
+%This project creates one million sample resistors of 10Ohm, 100Ohm, and
+%1000Ohm, each with 1% tolerance. It creates four different graphs for each
+%resistor group. The first two are the first 100 resistors, and the second
+%two are a random group of 100 (SHOWN IN RED). The first line of graphs
+%shows 10Ohm samples, the second 100Ohm, and the third 1000Ohm.
+
+clear all
+clc
+format short
+
+r10([1:1000000]) = 10 + (rand(1,1000000)-.5)*2/10;  %10ohm with 1% tolerance
+r100([1:1000000]) = 100 + (rand(1,1000000)-.5)*2;   %100ohm with 1% tolerance
+r1000([1:1000000]) = 1000 + (rand(1,1000000)-.5)*20;%1000ohm with 1% tolerance
+
+
+r10samp(1:100) = r10(randi(1000000,1,100));     %100 random 10 ohm resistors
+r100samp(1:100) = r100(randi(1000000,1,100));   %100 random 100 ohm resistors
+r1000samp(1:100) = r1000(randi(1000000,1,100)); %100 random 1000 ohm resistors
+
+disp(['Average Resistance of 10 Ohm Resistor: ' num2str(mean(r10))])
+disp(['Average Resistance of 100 Ohm Resistor: ' num2str(mean(r100))])  
+disp(['Average Resistance of 1000 Ohm Resistor: ' num2str(mean(r1000))])
+
+
+%R = 10 Ohms, first 100
+subplot(3,4,1)
+plot(r10([1:100]));   % first 100 resistors
+xlabel('First 100 - 10 Ohm Resistors')
+ylabel('Resistance (Ohms)')
+title('10 Ohms')
+
+subplot(3,4,2)
+hist(r10([1:100]));
+xlabel('Resistance (Ohms)')
+ylabel('# of Resistors')
+title('Histogram of 10 Ohms resistor')
+
+%R = 10 Ohms, random 100
+subplot(3,4,3)
+plot(r10samp(1:100), 'r')
+xlabel('Random 100 - 10 Ohm Resistors')
+ylabel('Resistance (Ohms)')
+title('Random 10 Ohm')
+
+subplot(3,4,4)
+hist(r10samp(1:100))
+h = findobj(gca,'Type','patch');
+set(h,'FaceColor','r','EdgeColor','k')
+xlabel('Resistance (Ohms)')
+ylabel('# of Resistors')
+title('Histogram of 100 Random 10 Ohm Resistors')
+
+%R = 100 Ohms, first 100
+subplot(3,4,5)
+plot(r100([1:100])); % first 100 resistors
+xlabel('First 100 - 100 Ohm Resistors')
+ylabel('Resistance (Ohms)')
+title('100 Ohms')
+
+subplot(3,4,6)
+hist(r100([1:100]));
+xlabel('Resistance (Ohms)')
+ylabel('# of Resistors')
+title('Histogram of 100 Ohms resistor')
+
+%R = 100, random 100
+subplot(3,4,7)
+plot(r100samp(1:100), 'r')
+xlabel('Random 100 - 100 Ohm Resistors')
+ylabel('Resistance (Ohms)')
+title('Random 100 Ohm')
+
+subplot(3,4,8)
+hist(r100samp(1:100))
+h = findobj(gca,'Type','patch');
+set(h,'FaceColor','r','EdgeColor','k')
+xlabel('Resistance (Ohms)')
+ylabel('# of Resistors')
+title('Histogram of 100 Random 100 Ohm Resistors')
+
+%R = 1000, first 100
+subplot(3,4,9)
+plot(r1000([1:100]));  % first 100 resistors
+xlabel('First 100 - 1000 Ohm Resistors')
+ylabel('Resistance (Ohms)')
+title('1000 Ohms resistor')
+
+subplot(3,4,10)
+hist(r1000([1:100]));
+xlabel('Resistance (Ohms)')
+ylabel('# of Resistors')
+title('Histogram of 1000 Ohms resistor')
+
+%R = 1000, random 100
+subplot(3,4,11)
+plot(r1000samp(1:100), 'r')
+xlabel('Random 100 - 1000 Ohm Resistors')
+ylabel('Resistance (Ohms)')
+title('1000 Ohm')
+
+subplot(3,4,12)
+hist(r1000samp(1:100))
+h = findobj(gca,'Type','patch');
+set(h,'FaceColor','r','EdgeColor','k')
+xlabel('Resistance (Ohms)')
+ylabel('# of Resistors')
+title('Histogram of 100 Random 1000 Ohm Resistors')
